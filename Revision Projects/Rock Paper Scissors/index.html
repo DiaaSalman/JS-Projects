@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="main.js" defer></script>
+  <title>Rock Paper Scissors</title>
+</head>
+
+<body>
+  <main>
+    <nav>
+      <img src="./assets/rock-paper-scissors_logo.png" alt="logo" class="logo" />
+      <div class="switch-mode">
+        <label class="ui-switch">
+          <input type="checkbox" />
+          <div class="slider">
+            <div class="circle"></div>
+          </div>
+        </label>
+      </div>
+    </nav>
+    <div class="game-container">
+      <div class="players">
+        <div class="player">
+          <div class="choices">
+            <button class="choice active" data-choice="rock">
+              ✊
+            </button>
+            <button class="choice" data-choice="paper">
+              ✊
+            </button>
+            <button class="choice" data-choice="scissors">
+              ✊
+            </button>
+          </div>
+          <div class="selected-icon">✊</div>
+          <h3 class="name">You</h3>
+          <p class="score">0</p>
+        </div>
+        <div class="computer">
+          <div class="selected-icon">✊</div>
+          <h3 class="name">Computer</h3>
+          <p class="score">0</p>
+        </div>
+      </div>
+      <div class="status-message">Computer Win</div>
+      <button class="reset"><img src="./assets/reset-icon.svg" width="24" height="24" alt="reset icon">
+        <span>Reset</span></button>
+    </div>
+  </main>
+</body>
+
+</html>
