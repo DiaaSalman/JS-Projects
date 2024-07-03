@@ -7,12 +7,16 @@
 }
 
 html {
-  font-size: 62.5%;
+  font-size: 56%;
 }
 
 body {
   font-family: 'Acme', sans-serif;
   background-color: #f6f2f6;
+}
+
+body.dark {
+  background-color: #1e092b;
 }
 
 main {
@@ -59,6 +63,10 @@ nav img {
   border-radius: 999px;
   position: relative;
   cursor: pointer;
+}
+
+.dark .slider {
+  background: #352241;
 }
 
 .slider .circle {
@@ -167,6 +175,9 @@ nav img {
   border: none;
   outline: 0;
 }
+.dark .choices .choice {
+  background-color: #352241;
+}
 .choices .choice.active {
   border: 2px solid #af66da;
 }
@@ -206,6 +217,9 @@ nav img {
   color: #1e092b;
   margin-top: 4rem;
 }
+.dark .name {
+  color: #fff;
+}
 
 .score {
   font-size: 4rem;
@@ -217,6 +231,10 @@ nav img {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.dark .score {
+  background-color: #352241;
+  color: #fff;
 }
 
 .status-message {

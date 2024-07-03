@@ -5,6 +5,15 @@ let statusMessage = document.querySelector('.status-message')
 let resetButton = document.querySelector('.reset')
 let computerScore = document.querySelector('.computer .score')
 let playerScore = document.querySelector('.player .score')
+let mode = document.querySelector('.ui-switch input')
+
+function switchMode() {
+  if (mode.checked) {
+    document.querySelector('body').classList.add('dark')
+  } else {
+    document.querySelector('body').classList.remove('dark')
+  }
+}
 
 function computerTurn() {
   let random = Math.floor(Math.random() * 3)
@@ -76,6 +85,10 @@ function determineWinner() {
 
 resetButton.addEventListener('click', () => {
   if (resetButton.style.cursor == 'pointer') location.reload()
+})
+
+mode.addEventListener('change', () => {
+  switchMode()
 })
 
 playerTurn()
