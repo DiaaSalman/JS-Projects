@@ -7,11 +7,38 @@ let computerScore = document.querySelector('.computer .score')
 let playerScore = document.querySelector('.player .score')
 let mode = document.querySelector('.ui-switch input')
 
+let computer = 0
+let player = 0
+
+// Load scores and theme from local storage
+window.onload = function () {
+  if (localStorage.getItem('computerScore')) {
+    computer = parseInt(localStorage.getItem('computerScore'), 10)
+    computerScore.textContent = computer
+  }
+  if (localStorage.getItem('playerScore')) {
+    player = parseInt(localStorage.getItem('playerScore'), 10)
+    playerScore.textContent = player
+  }
+  if (localStorage.getItem('theme') === 'dark') {
+    mode.checked = true
+    switchMode()
+  }
+  // Restore reset button state
+  if (localStorage.getItem('resetButtonStyle')) {
+    const style = JSON.parse(localStorage.getItem('resetButtonStyle'))
+    resetButton.style.backgroundColor = style.backgroundColor
+    resetButton.style.cursor = style.cursor
+  }
+}
+
 function switchMode() {
   if (mode.checked) {
     document.querySelector('body').classList.add('dark')
+    localStorage.setItem('theme', 'dark')
   } else {
     document.querySelector('body').classList.remove('dark')
+    localStorage.setItem('theme', 'light')
   }
 }
 
@@ -36,6 +63,13 @@ function playerTurn() {
 
       resetButton.style.backgroundColor = '#af66da'
       resetButton.style.cursor = 'pointer'
+      localStorage.setItem(
+        'resetButtonStyle',
+        JSON.stringify({
+          backgroundColor: resetButton.style.backgroundColor,
+          cursor: resetButton.style.cursor,
+        }),
+      )
 
       computerTurn()
 
@@ -44,8 +78,6 @@ function playerTurn() {
   })
 }
 
-let computer = 0,
-  player = 0
 function determineWinner() {
   if (
     (computerSelection.textContent.trim() === '✊' &&
@@ -61,6 +93,7 @@ function determineWinner() {
     statusMessage.style.backgroundColor = '#fde5e5'
     computer++
     computerScore.textContent = computer
+    localStorage.setItem('computerScore', computer)
   } else if (
     (computerSelection.textContent.trim() === '✌️' &&
       playerSelection.textContent.trim() === '✊') ||
@@ -75,6 +108,7 @@ function determineWinner() {
     statusMessage.style.backgroundColor = '#d7f7da'
     player++
     playerScore.textContent = player
+    localStorage.setItem('playerScore', player)
   } else {
     statusMessage.style.display = 'block'
     statusMessage.textContent = 'Draw'
@@ -84,7 +118,23 @@ function determineWinner() {
 }
 
 resetButton.addEventListener('click', () => {
-  if (resetButton.style.cursor == 'pointer') location.reload()
+  computer = 0
+  player = 0
+  computerScore.textContent = computer
+  playerScore.textContent = player
+  localStorage.setItem('computerScore', computer)
+  localStorage.setItem('playerScore', player)
+  statusMessage.style.display = 'none'
+  playerChoices.forEach((item) => item.classList.remove('active'))
+  resetButton.style.backgroundColor = '#827986'
+  resetButton.style.cursor = 'not-allowed'
+  localStorage.setItem(
+    'resetButtonStyle',
+    JSON.stringify({
+      backgroundColor: resetButton.style.backgroundColor,
+      cursor: resetButton.style.cursor,
+    }),
+  )
 })
 
 mode.addEventListener('change', () => {
